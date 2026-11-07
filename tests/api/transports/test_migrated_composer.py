@@ -3878,3 +3878,14 @@ async def test_upload_readback_that_proves_nothing_keeps_the_unknown_outcome(
     with patch.object(FakeFileChooser, "set_files", fail_upload):
         with pytest.raises(RpcResponseUnavailableError, match="body was unavailable"):
             await migrated_composer.MigratedComposer().upload(page, PROJ_UUID, _png(tmp_path))
+
+
+@pytest.mark.parametrize("seconds", [4, 6, 8, 10])
+async def test_omni_r2v_accepts_explicit_supported_duration(seconds: int) -> None:
+    """Omni's live abra_r2v_<n>s_360p requests keep the character entity ids."""
+    page = FakePage()
+    await migrated_composer.MigratedComposer().apply_video_settings(
+        page, _r2v_request(model=VideoModel.OMNI_FLASH, duration=seconds)
+    )
+    radios = page.dom.groups["duration"]
+    assert radios[[4, 6, 8, 10].index(seconds)].checked

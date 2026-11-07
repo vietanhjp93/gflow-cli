@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Explicit Omni 1.2 Flash with exact integer durations 3–15 seconds, migrated slider
+  validation and CLI/MCP/catalog/manifest parity (upstream PR #1168).
+
+### Fixed
+
+- Omni 1.1 ingredients accepts 4/6/8/10 seconds while Veo/unspecified models keep
+  their 8-second safety restriction (upstream PR #1167).
+
 ## [0.92.1] — 2026-10-30
 
 ### Fixed
